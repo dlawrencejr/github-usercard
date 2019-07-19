@@ -7,12 +7,11 @@
 
 axios.get('https://api.github.com/users/dlawrencejr')
 .then((data) => {
-  console.log('Successfully captured!',data)
+  console.log('Successfully captured!',data);
 
   let cards = document.querySelector('.cards');
-  cards.appendChild(createCard(data.data))
-  
-  
+  cards.appendChild(createCard(data.data));
+    
 })
 .catch(function(err) {
    console.log('Error!!!', err);
@@ -40,16 +39,6 @@ axios.get('https://api.github.com/users/dlawrencejr')
           user, and adding that card to the DOM.
 */
 
-const followersArray = ['tetondan','dustinmyers','justsml','luishrd','bigknell'];
-
-followersArray.forEach(user => {
-  axios.get(`https://api.github.com/users/${user}`)
-  .then(data => {
-    const card = createCard(data.data)
-    const cards = document.querySelector('.cards')
-    cards.appendChild(card)
-  })
-})
 
 
 /* Step 3: Create a function that accepts a single object as its only argument,
@@ -102,24 +91,24 @@ function createCard (data){
 
   cardsInfo.appendChild(cardLocation);
   cardsInfo.classList.add('location');
-  cardsInfo.textContent = `Location: ${data.location}`;
+  cardsInfo.textContent = `Location:${data.location}`;
 
   cardsInfo.appendChild(cardProfile);
   cardsInfo.classList.add('profile');
-  cardProfile.textContent = `Profile: ${cardAddress}`;
+  cardProfile.textContent = `Profile:${cardAddress}`;
 
   cardsInfo.appendChild(cardAddress);
   const profileAddress = data.url;
   cardAddress.innerHTML = profileAddress.link(data.url);
 
   cardsInfo.appendChild(cardFollower);
-  cardFollower.textContent = `Followers: ${data.followers}`;
+  cardFollower.textContent = `Followers:${data.followers}`;
 
   cardsInfo.appendChild(cardFollowing);
-  cardFollowing.textContent = `Following: ${data.following}`;
+  cardFollowing.textContent = `Following:${data.following}`;
 
   cardsInfo.appendChild(cardBio);
-  cardBio.textContent = `Bio: ${data.bio}`;
+  cardBio.textContent = `Bio:${data.bio}`;
 
   console.log(card)
 
@@ -132,3 +121,13 @@ function createCard (data){
   luishrd
   bigknell
 */
+const followersArray = ['tetondan','dustinmyers','justsml','luishrd','bigknell'];
+
+followersArray.forEach(user => {
+  axios.get(`https://api.github.com/users/${user}`)
+  .then(data => {
+    const card = createCard(data.data)
+    const cards = document.querySelector('.cards')
+    cards.appendChild(card)
+  })
+})
